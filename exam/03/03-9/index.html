@@ -10,7 +10,7 @@
 <body>
   <div id="app">
     <!-- v-bind는 상위에서 하위로, v-on은 하위에서 상위로 -->
-    <!-- 하위 show-log 이벤트가 발생하면 상위 printText가 실행됨 -->
+    <!-- 하위 show-log 이벤트를 emit하며 상위 printText가 실행됨 -->
     <child-component v-on:show-log="printText"></child-component>
   </div>
 
