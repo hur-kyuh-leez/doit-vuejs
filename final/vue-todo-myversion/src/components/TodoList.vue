@@ -66,22 +66,28 @@ li {
   color: #de4343;
 }
 
-/* 여기서 부터는 animation name="list" 니까, 다 list-머시기 이렇게 되어 있음 */
+/* 여기서 부터는 animation name="list" 니까, 다 list-머시기 이렇게 되어 있음
+https://vuejs.org/v2/guide/transitions.html*/
+/*-time은 공식문서에서 나오지도 않는다 뭐지?*/
 .list-time {
-  display: ineline-block;
-  margin-right: 10px;
+  display: inline-block;
+  margin-right: 100px;
 }
+/*인덱스가 변경 될 때*/
 .list-move {
-  transition: transform 1s;
+  transition: transform 10s;
 }
+
+/* 새로 에드/제거 할 때*/
 .list-enter-active,
 .list-leave-active {
-  transition: all 1s;
+  transition: all 1s; /* 사실 이거 -enter, -leave-to에 넣어도 된다.*/
 }
-/* 여기가 가장 중요 메인임 */
+
 .list-enter,
 .list-leave-to {
   opacity: 0;
-  transform: trnaslateY(30px);
+  transform: translateY(-300px); /* 포지션 변경*/
+  transition: all 1s;
 }
 </style>
