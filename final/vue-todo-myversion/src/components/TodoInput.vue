@@ -1,20 +1,25 @@
-<template> 
-<div class="inputBox shadow">
+<template>
+  <div class="inputBox shadow">
     <!-- v-model은 데이터를 즉시 동기화 함, 그러하니 v-model는  data()를 부르는게 맞음 -->
-    <input type="text" v-model="newTodoItem" placeholder="add anything!" v-on:keyup.enter="addTodo"> 
-    <span class="addContainer" v-on:click="addTodo">
-        <!-- fa fa-plus는 아이콘 추가임 -->
-        <i class="addBtn fa fa-plus" aria-hidden="true"></i>  
+    <input
+      type="text"
+      v-model="newTodoItem"
+      placeholder="add anything!"
+      v-on:keyup.enter="addTodoChild"
+    />
+    <span class="addContainer" v-on:click="addTodoChild">
+      <!-- fa fa-plus는 아이콘 추가임 -->
+      <i class="addBtn fa fa-plus" aria-hidden="true"></i>
     </span>
 
-<modal v-if="showModal" @close="showModal=false">
-<h3 slot="header">경고</h3>
-<span slot="footer" @click="showModal=false">
-  할 일을 입력하세요
-  <i class="closeModalBtn fa fa-times" aria-hidden="true"></i>
-</span>
-</modal>
-</div>
+    <modal v-if="showModal" @close="showModal=false">
+      <h3 slot="header">경고</h3>
+      <span slot="footer" @click="showModal=false">
+        할 일을 입력하세요
+        <i class="closeModalBtn fa fa-times" aria-hidden="true"></i>
+      </span>
+    </modal>
+  </div>
 </template>
 <script>
 import Modal from "./common/Modal.vue";
@@ -26,10 +31,10 @@ export default {
     };
   },
   methods: {
-    addTodo() {
+    addTodoChild() {
       if (this.newTodoItem !== "") {
         var value = this.newTodoItem && this.newTodoItem.trim(); //.trim remove unecssary blanks. ex)  "     Hello World!     " --> "Hello World!" 그런데 왜 아직 스페이스 하나는 등록이 될까?
-        this.$emit("addTodo", value);
+        this.$emit("addTodoParent", value);
         //여기서 더 이상  localStorage를 안하고 상위에서 처리한다. localStorage.setItem(value, value); // .setItem(keyName, keyValue);
         this.clearInput();
       } else {
