@@ -2,7 +2,7 @@
 <template>
   <div id="”app”">
     <TodoHeader></TodoHeader>
-    <TodoInput v-on:addTodoChild="addTodoParent"></TodoInput>
+    <TodoInput v-on:addTodo="addTodo"></TodoInput>
     <TodoList v-on:removeTodo="removeTodo" v-bind:propsdata="todoItems"></TodoList>
     <TodoFooter v-on:clearAll="clearAll"></TodoFooter>
   </div>
@@ -20,7 +20,7 @@ export default {
     };
   },
   methods: {
-    addTodoParent(value) {
+    addTodo(value) {
       localStorage.setItem(value, value); // .setItem(keyName, keyValue);
       this.todoItems.push(value); // 이렇게 데이터를 하나는 로컬에 하나는 todoItems에 두번 저장한다.
     },

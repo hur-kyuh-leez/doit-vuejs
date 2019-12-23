@@ -1,13 +1,8 @@
 <template>
   <div class="inputBox shadow">
     <!-- v-model은 데이터를 즉시 동기화 함, 그러하니 v-model는  data()를 부르는게 맞음 -->
-    <input
-      type="text"
-      v-model="newTodoItem"
-      placeholder="add anything!"
-      v-on:keyup.enter="addTodoChild"
-    />
-    <span class="addContainer" v-on:click="addTodoChild">
+    <input type="text" v-model="newTodoItem" placeholder="add anything!" v-on:keyup.enter="addTodo" />
+    <span class="addContainer" v-on:click="addTodo">
       <!-- fa fa-plus는 아이콘 추가임 -->
       <i class="addBtn fa fa-plus" aria-hidden="true"></i>
     </span>
@@ -31,10 +26,10 @@ export default {
     };
   },
   methods: {
-    addTodoChild() {
+    addTodo() {
       if (this.newTodoItem !== "") {
         var value = this.newTodoItem && this.newTodoItem.trim(); //.trim remove unecssary blanks. ex)  "     Hello World!     " --> "Hello World!" 그런데 왜 아직 스페이스 하나는 등록이 될까?
-        this.$emit("addTodoParent", value);
+        this.$emit("addTodo", value);
         //여기서 더 이상  localStorage를 안하고 상위에서 처리한다. localStorage.setItem(value, value); // .setItem(keyName, keyValue);
         this.clearInput();
       } else {
