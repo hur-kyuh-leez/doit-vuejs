@@ -1,21 +1,26 @@
-<template> 
-<section>
+<template>
+  <section>
     <transition-group name="list" tag="ul">
-        <!-- 리액트처럼 v-for 하면 v-bind:key를 꼭 해줘야함 주위해야 할 건, python와 반대로 index가 뒤쪽에 위치한다 -->
-        <!-- <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">  -->
-        <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow"> 
-        
-            <!-- aria-hidden 하면 tree에서 접근 못하게 한다는데 왜 필요하지? -->
-            <i class="checkBtn fa fa-check" aria-hidden="true"></i>
-            {{todoItem}}
-            <span class="removeBtn" type="button" @click="removeTodo(todoItem, index)">
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
-            </span>
-        </li>
+      <!-- 리액트처럼 v-for 하면 v-bind:key를 꼭 해줘야함. 주위해야 할 건, python와 반대로 index가 뒤쪽에 위치한다 -->
+      <!-- <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">  -->
+      <!--상위에서 받은 propsdata(todoItems)안에 있는 각 데이터 마다...-->
+      <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
+        <!-- aria-hidden 하면 tree에서 접근 못하게 한다는데 왜 필요하지? Accessibility(청각장애인)를 위해서 소리를 낼 때 무시하라고 알려주는 것 이런 디테일 좋다.-->
+        <i class="checkBtn fa fa-check" aria-hidden="true"></i>
+        {{todoItem}}
+        <span
+          class="removeBtn"
+          type="button"
+          @click="removeTodo(todoItem, index)"
+        >
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </span>
+      </li>
     </transition-group>
-</section>
+  </section>
 </template> <script>
 export default {
+  // 상위에서 받은 propsdata(todoItems)를 저장함
   props: ["propsdata"],
 
   // 더 이상 필요가 없음 위에서 데이터 처리 예정
@@ -34,6 +39,7 @@ export default {
   //   },
   methods: {
     removeTodo(todoItem, index) {
+      // 상위 컴포넌트 "removeTodo"에 todoItem, index 넣어서 보내기(emit)
       this.$emit("removeTodo", todoItem, index);
     }
   }
@@ -41,12 +47,14 @@ export default {
 </script>
 <style>
 ul {
+  /* 리스팅 될 때 앞에 점이나 숫자 빼주는 것 */
   list-style-type: none;
   padding-left: 0px;
   margin-top: 0;
   text-align: left;
 }
 li {
+  /* 이전에 배울 때 footer가 원위치로 가게 도와주는 것. 근데 여기서 역활이 뭐지? 없어도 되네...;;;*/
   display: flex;
   min-height: 50px;
   height: 50px;

@@ -1,12 +1,17 @@
 <template>
   <div class="inputBox shadow">
-    <!-- v-model은 데이터를 즉시 동기화 함, 그러하니 v-model는  data()를 부르는게 맞음 -->
+    <!-- v-model은 데이터를 즉시 동기화 함(two-way data bindings on form), 그러하니 v-model는  data()를 부르는게 맞음 -->
+    <!-- 텍스트로 구성된 입력을 만들고 v-model을 통해 two-way data binding을 한다. data는 data()에 있는 newTodoItem와 동기화 한다.
+    그리고 입력 도우미에는 "add anything!" 글로 안내하고 만약 입력란안에서 엔터를 치면 addTodo를 실행해라-->
     <input type="text" v-model="newTodoItem" placeholder="add anything!" v-on:keyup.enter="addTodo" />
+
+    <!-- i class에서 만들어진 버튼을 클릭을 하면 addTodo를 실행해라 -->
     <span class="addContainer" v-on:click="addTodo">
       <!-- fa fa-plus는 아이콘 추가임 -->
       <i class="addBtn fa fa-plus" aria-hidden="true"></i>
     </span>
-
+    <!-- 만약 showModal이 참일 때, 창을 닫으면 showModal을 거짓으로 바꿔라
+    참고로 Modal은 이미 format이 정해져있다.-->
     <modal v-if="showModal" @close="showModal=false">
       <h3 slot="header">경고</h3>
       <span slot="footer" @click="showModal=false">
@@ -17,11 +22,15 @@
   </div>
 </template>
 <script>
+/* 여기 뭐지 Modal import 하고 component에 등록을 하는데 
+정작 <template>에서 <Modal>을 찾을 수 없고 <modal>만 보인다. 
+그런데도 잘 작동한다. Modal이 하나 다른점은 export default가 없다는 점?
+*/
 import Modal from "./common/Modal.vue";
 export default {
   data() {
     return {
-      newTodoItem: "처음데이터",
+      newTodoItem: "",
       showModal: false
     };
   },
@@ -31,7 +40,6 @@ export default {
         var value = this.newTodoItem && this.newTodoItem.trim(); //.trim remove unecssary blanks. ex)  "     Hello World!     " --> "Hello World!" 그런데 왜 아직 스페이스 하나는 등록이 될까?
         this.$emit("addTodo", value);
         //여기서 더 이상  localStorage를 안하고 상위에서 처리한다. localStorage.setItem(value, value); // .setItem(keyName, keyValue);
-        this.clearInput();
       } else {
         this.showModal = !this.showModal;
       }

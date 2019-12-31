@@ -1,12 +1,13 @@
-<template> 
-<div class="clearAllContainer">
+<template>
+  <div class="clearAllContainer">
     <span class="clearAllBtn" @click="clearAll">ClearAll</span>
-</div>
+  </div>
 </template>
 <script>
 export default {
   methods: {
     clearAll() {
+      // 상위 "clearAll"에 아무것도 없이 보낸다.
       this.$emit("clearAll");
     }
   }
