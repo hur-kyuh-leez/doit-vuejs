@@ -16,7 +16,7 @@
       <h3 slot="header">경고</h3>
       <span slot="footer" @click="showModal=false">
         할 일을 입력하세요
-        <i class="closeModalBtn fa fa-times" aria-hidden="true"></i>
+        <i class="closeModalBtn fa fa-times" aria-hidden="true" style="cursor:pointer"></i>
       </span>
     </modal>
   </div>

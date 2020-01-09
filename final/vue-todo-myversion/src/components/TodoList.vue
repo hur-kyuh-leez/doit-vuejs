@@ -5,7 +5,7 @@
       <!-- <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">  -->
       <!--상위에서 받은 propsdata(todoItems)안에 있는 각 데이터 마다...-->
       <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
-        <!-- aria-hidden 하면 tree에서 접근 못하게 한다는데 왜 필요하지? Accessibility(청각장애인)를 위해서 소리를 낼 때 무시하라고 알려주는 것 이런 디테일 좋다.-->
+        <!-- aria-hidden(aria stands form accessible ich Internet) 하면 tree에서 접근 못하게 한다는데 왜 필요하지? Accessibility(청각장애인)를 위해서 소리를 낼 때 무시하라고 알려주는 것 이런 디테일 좋다.-->
         <i class="checkBtn fa fa-check" aria-hidden="true"></i>
         {{todoItem}}
         <span

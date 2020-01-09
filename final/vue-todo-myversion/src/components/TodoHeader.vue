@@ -1,8 +1,9 @@
-<template> 
-<header>
+<template>
+  <header>
     <h1>JUST DO IT!</h1>
-</header>
-</template> <script>
+  </header>
+</template>
+<script>
 export default {};
 </script>
 <style scoped>
